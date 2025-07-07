@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Form- Mamak Modern</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="order-delete.html">Order</a></li>
+        <li><a href="orderview.html">View</a></li>
+        <li><a href="orderform.html"class="active">Form</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="feedback-view.html">Feedback-View</a></li>
+        <li><a href="complaint.html">Complaint</a></li>
+        <li><a href="complainview.html">Complaint-View</a></li>
+        <li><a href="promotion.html">Promotion</a></li>
+        <li><a href="faqs.html">Faq</a></li>
+        <li><a href="group.html">Group</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+   <section class="form-section">
+    <center><h2>Place Your Order</h2>
+    <form id="orderForm">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="menu-item">Select Menu Item:</label>
+      <select id="menu-item" name="menu-item" required>
+        <option value="">-- Select --</option>
+        <option value="Fresh salmon grilled with lemon butter sauce">Fresh salmon grilled with lemon butter sauce</option>
+        <option value="Premium Steak">Premium Steak</option>
+        <option value="Classic Carbonara">Classic Carbonara</option>
+        <option value="Truffle Pasta">Truffle Pasta</option>
+        <option value="Nasi Campur">Nasi Campur</option>
+      </select>
+
+      <label>Select Table(s) (up to 10):</label>
+      <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+          <th>Table Number</th>
+          <th>Select</th>
+        </tr>
+        <script>
+          for (let i = 1; i <= 10; i++) {
+            document.write(`
+              <tr>
+                <td>Table ${i}</td>
+                <td><input type="checkbox" name="tables" value="${i}"></td>
+              </tr>`);
+          }
+        </script>
+      </table>
+
+      <label for="notes">Additional Notes:</label>
+      <textarea id="notes" name="notes" rows="4"></textarea>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; This website is not the official website of Mamak Modern. It was developed solely for educational purposes under the IML254 course at Universiti Teknologi MARA.</p>
+  </footer>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const selectedTables = Array.from(document.querySelectorAll('input[name="tables"]:checked')).map(cb => cb.value);
+      const order = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        item: document.getElementById("menu-item").value,
+        tables: selectedTables,
+        notes: document.getElementById("notes").value
+      };
+      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      alert("Order submitted!");
+      this.reset();
+    });
+  </script>
+</body>
+</html>

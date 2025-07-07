@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Mamak Modern</title>
+  <link rel="stylesheet" href="style.css">
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html" class="active">Login</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="order-delete.html">Order</a></li>
+        <li><a href="orderview.html">View</a></li>
+        <li><a href="orderform.html">Form</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="feedback-view.html">Feedback-View</a></li>
+        <li><a href="complaint.html">Complaint</a></li>
+        <li><a href="complainview.html">Complaint-View</a></li>
+        <li><a href="promotion.html">Promotion</a></li>
+        <li><a href="faqs.html">Faq</a></li>
+        <li><a href="group.html">Group</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container" id="loginContainer">
+    <div class="login-box">
+      <span class="login-icon">&#127834;</span>
+      <h2>Log In to Your Account</h2>
+      <form id="loginForm">
+        <input type="text" name="username" placeholder="Enter Username" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    
+    <!-- Login form footer -->
+    </div>
+  </div>
+
+  <div class="profile-section" id="profileSection">
+    <div class="profile-header">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile Picture" class="profile-pic">
+      <div class="profile-info">
+        <h3 id="profileName">John Doe</h3>
+        <p>Member since: <span id="memberSince">January 2023</span></p>
+        <p>Loyalty Points: <span id="loyaltyPoints">1,250</span></p>
+      </div>
+    </div>
+    
+    <div class="profile-details">
+      <div class="detail-card">
+        <h4>Contact Information</h4>
+        <p><strong>Email:</strong> <span id="userEmail">john.doe@example.com</span></p>
+        <p><strong>Phone:</strong> <span id="userPhone">+6012-3456789</span></p>
+        <p><strong>Address:</strong> <span id="userAddress">123 Jalan Mamak, 50200 Kuala Lumpur</span></p>
+      </div>
+      
+      <button class="logout-btn" id="logoutBtn">Log Out</button>
+    </div>
+  </div>
+
+  <!-- Main page footer -->
+  <footer>
+    <p>&copy; This website is not the official website of Mamak Modern. It was developed solely for educational purposes under the IML254 course at Universiti Teknologi MARA.</p>
+  </footer>
+
+  <script>
+    // Malaysian addresses data
+    const malaysianAddresses = [
+      "45 Jalan Tun Razak, 50400 Kuala Lumpur",
+      "12 Jalan Ampang, 55000 Kuala Lumpur",
+      "78 Jalan Bukit Bintang, 55100 Kuala Lumpur",
+      "23 Jalan Pahang, 53000 Kuala Lumpur",
+      "56 Jalan Sultan Ismail, 50250 Kuala Lumpur",
+      "34 Jalan Ipoh, 51200 Kuala Lumpur",
+      "89 Jalan Klang Lama, 58000 Kuala Lumpur",
+      "67 Jalan Cheras, 56000 Kuala Lumpur",
+      "112 Jalan Kuchai Lama, 58200 Kuala Lumpur",
+      "29 Jalan Sungei Besi, 57100 Kuala Lumpur"
+    ];
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const usernameInput = document.querySelector("[name='username']");
+      const username = usernameInput.value.trim();
+
+      if (username) {
+        // Hide login form and show profile
+        document.getElementById("loginContainer").style.display = "none";
+        document.getElementById("profileSection").style.display = "block";
+        
+        // Update profile name with the logged in username
+        document.getElementById("profileName").textContent = username;
+        
+        // Generate email based on username
+        const email = username.toLowerCase().replace(/\s+/g, '.') + "@gmail.com";
+        document.getElementById("userEmail").textContent = email;
+        
+        // Generate random Malaysian address
+        const randomAddress = malaysianAddresses[Math.floor(Math.random() * malaysianAddresses.length)];
+        document.getElementById("userAddress").textContent = randomAddress;
+        
+        // Change active nav item
+        document.querySelector('.active').classList.remove('active');
+      } else {
+        alert("Please enter your username.");
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", function() {
+      // Show login form and hide profile
+      document.getElementById("loginContainer").style.display = "flex";
+      document.getElementById("profileSection").style.display = "none";
+      
+      // Reset form
+      document.getElementById("loginForm").reset();
+      
+      // Set login nav item as active again
+      document.querySelector('a[href="login.html"]').classList.add('active');
+    });
+  </script>
+
+</body>
+</html>

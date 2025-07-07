@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order View - Mamak Modern</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="order-delete.html">Order</a></li>
+        <li><a href="orderview.html" class="active">View</a></li>
+        <li><a href="orderform.html">Form</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="feedback-view.html">Feedback-View</a></li>
+        <li><a href="complaint.html">Complaint</a></li>
+        <li><a href="complainview.html">Complaint-View</a></li>
+        <li><a href="promotion.html">Promotion</a></li>
+        <li><a href="faqs.html">Faq</a></li>
+        <li><a href="group.html">Group</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <center><h2>View Order List</h2>
+
+    <div class="btn-group">
+      <button onclick="resetOrder()">Reset Orders</button>
+      <a href="order-delete.html"><button>Go to Delete Order</button></a>
+    </div>
+
+    <table id="orderTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Item</th>
+          <th>Tables</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="orderBody">
+        <tr>
+          <td colspan="6">No orders available.</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>&copy; This website is not the official website of Mamak Modern. It was developed solely for educational purposes under the IML254 course at Universiti Teknologi MARA.</p>
+  </footer>
+
+  <script>
+    function loadOrders() {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const tbody = document.getElementById('orderBody');
+      tbody.innerHTML = '';
+
+      if (orders.length === 0) {
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 6;
+        cell.textContent = 'No orders available.';
+        row.appendChild(cell);
+        tbody.appendChild(row);
+        return;
+      }
+
+      orders.forEach((order, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${order.name}</td>
+          <td>${order.phone}</td>
+          <td>${order.item}</td>
+          <td>${order.tables ? order.tables.join(', ') : ''}</td>
+          <td>${order.notes}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function resetOrder() {
+      if (confirm('Are you sure you want to reset all orders?')) {
+        localStorage.removeItem('orders');
+        loadOrders();
+      }
+    }
+
+    loadOrders();
+  </script>
+
+</body>
+</html>

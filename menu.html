@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu | Mamak Modern</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="menu.html" class="active">Menu</a></li>
+        <li><a href="order-delete.html">Order</a></li>
+        <li><a href="orderview.html">View</a></li>
+        <li><a href="orderform.html">Form</a></li>
+        <li><a href="location.html">Location</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="feedback-view.html">Feedback-View</a></li>
+        <li><a href="complaint.html">Complaint</a></li>
+        <li><a href="complainview.html">Complaint-View</a></li>
+        <li><a href="promotion.html">Promotion</a></li>
+        <li><a href="faqs.html">Faq</a></li>
+        <li><a href="group.html">Group</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="menu-grid">
+    <div class="menu-item">
+      <img src="salmon.jpg" alt="Grilled Salmon">
+      <h3>Grilled Salmon</h3>
+      <p>Fresh salmon grilled with lemon butter sauce.</p>
+      <p><strong>Recommended Drink:</strong> Sparkling Apple Juice</p>
+      <p><strong>RM 45.00</strong></p>
+      <button onclick="addToOrder('Grilled Salmon', 45.00, 'salmon.jpg')">Add to Order</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="steak.jpg" alt="Premium Steak">
+      <h3>Premium Steak</h3>
+      <p>Juicy, tender steak with herb butter and veggies.</p>
+      <p><strong>Recommended Drink:</strong> Classic Iced Lemon Tea</p>
+      <p><strong>RM 65.00</strong></p>
+      <button onclick="addToOrder('Premium Steak', 65.00, 'steak.jpg')">Add to Order</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="carbonara.jpg" alt="Classic Carbonara">
+      <h3>Classic Carbonara</h3>
+      <p>Creamy pasta with smoked beef and parmesan.</p>
+      <p><strong>Recommended Drink:</strong> Chilled Mango Juice</p>
+      <p><strong>RM 23.00</strong></p>
+      <button onclick="addToOrder('Classic Carbonara', 23.00, 'carbonara.jpg')">Add to Order</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="pasta.jpg" alt="Truffle Pasta from Freepik">
+      <h3>Truffle Pasta</h3>
+      <p>Rich truffle cream sauce with wild mushrooms and herbs.</p>
+      <p><strong>Recommended Drink:</strong> Sparkling Water with Lime</p>
+      <p><strong>RM 25.00</strong></p>
+      <button onclick="addToOrder('Truffle Pasta', 25.00, 'pasta.jpg')">Add to Order</button>
+    </div>
+
+    <div class="menu-item">
+      <img src="nasi.jpg" alt="Nasi Campur">
+      <h3>Nasi Campur</h3>
+      <p>Traditional mixed rice with vegetables, egg, and sambal.</p>
+      <p><strong>Recommended Drink:</strong> Iced Sirap Bandung</p>
+      <p><strong>RM 10.00</strong></p>
+      <button onclick="addToOrder('Nasi Campur', 10.00, 'nasi.jpg')">Add to Order</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; This website is not the official website of Mamak Modern. It was developed solely for educational purposes under the IML254 course at Universiti Teknologi MARA.</p>
+  </footer>
+
+  <script>
+    function addToOrder(name, price, image) {
+      const order = JSON.parse(localStorage.getItem('order')) || [];
+      order.push({ name: name, price: price, image: image });
+      localStorage.setItem('order', JSON.stringify(order));
+      alert(name + " added to your order!");
+    }
+  </script>
+
+</body>
+</html>
